@@ -1,0 +1,22 @@
+name: Build & deploy docker image
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy-image:
+    name: Deploy to docker hub
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event_name == 'push' }}
+
+    steps:
+      - run: docker login -u jsmrcaga -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - uses: actions/checkout@master
+
+      - run: docker build .
+        name: Build image
+
+      - run: docker push jsmrcaga/aws-cli:latest
