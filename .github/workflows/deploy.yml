@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/checkout@master
 
-      - run: docker build .
+      - run: docker build -t jsmrcaga/aws-cli .
         name: Build image
 
       - run: docker push jsmrcaga/aws-cli:latest
